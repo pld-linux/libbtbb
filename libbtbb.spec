@@ -17,6 +17,9 @@ Patch0:		%{name}-python.patch
 URL:		https://github.com/greatscottgadgets/libbtbb
 BuildRequires:	cmake >= 2.8
 BuildRequires:	python3 >= 1:3
+BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -59,6 +62,7 @@ Statyczna biblioteka libbtbb.
 Summary:	Python tools for working with pcap files produced via libbtbb
 Summary(pl.UTF-8):	Narzędzia pythonowe do pracy z plikami pcap tworzonymi przy pomocy libbtbb
 Group:		Development/Tools
+BuildArch:	noarch
 
 %description python
 Supplemental tools for working with pcap files produced via libbtbb.
@@ -73,6 +77,9 @@ libbtbb.
 
 %{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' \
 	python/pcaptools/btaptap
+
+%{__sed} -i -e 's, --root, --install-purelib=%{py3_sitescriptdir} &,' \
+	python/pcaptools/CMakeLists.txt
 
 %build
 install -d build
@@ -118,5 +125,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc python/pcaptools/README
 %attr(755,root,root) %{_bindir}/btaptap
-%{py3_sitedir}/pcapdump
-%{py3_sitedir}/pcapdump-*.egg-info
+%{py3_sitescriptdir}/pcapdump
+%{py3_sitescriptdir}/pcapdump-*.egg-info
