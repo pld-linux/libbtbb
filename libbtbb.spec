@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	Biblioteka dekodowania warstwy baseband Bluetooth
 Name:		libbtbb
 %define	tag_ver	2020-12-R1
 Version:	%(echo %{tag_ver} | tr - _)
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/greatscottgadgets/libbtbb/releases
